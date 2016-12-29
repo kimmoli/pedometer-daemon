@@ -4,7 +4,7 @@ QT += dbus
 QT -= gui
 
 CONFIG += link_pkgconfig
-PKGCONFIG += sensord-qt5 mlite5
+PKGCONFIG += sensord-qt5
 
 # DBus
 system(qdbusxml2cpp config/com.kimmoli.pedometerd.xml -i src/stepcounter.h -a src/adaptor)

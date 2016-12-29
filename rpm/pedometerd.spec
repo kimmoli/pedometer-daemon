@@ -21,7 +21,6 @@ Requires:   hybris-libsensorfw-qt5 > 0.8.30
 
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
-BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(sensord-qt5)
 BuildRequires:  sensorfw-qt5-devel
 
