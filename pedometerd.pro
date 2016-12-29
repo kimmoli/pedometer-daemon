@@ -1,6 +1,6 @@
 TARGET = pedometerd
 
-QT += dbus
+QT += dbus network
 QT -= gui
 
 CONFIG += link_pkgconfig
