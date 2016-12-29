@@ -17,6 +17,7 @@ class StepCounter : public QObject
 public:
     explicit StepCounter(QObject *parent = 0);
     ~StepCounter();
+    bool registerDBus();
 
 public slots:
     QString getVersion();
@@ -31,7 +32,6 @@ private slots:
     void dataChanged(const Unsigned& data);
 
 private:
-    bool registerDBus();
     void update();
 
     StepCounterSensorChannelInterface* sensor;

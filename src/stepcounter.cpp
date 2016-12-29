@@ -20,7 +20,7 @@ StepCounter::StepCounter(QObject *parent) :
 
     if (sensor == NULL || !sensor->isValid())
     {
-        printf("pedometerd: Unable to get session: %s\n" << sm.errorString();
+        printf("pedometerd: Unable to get session: %s\n",  qPrintable(sm.errorString()));
     }
     else
     {
