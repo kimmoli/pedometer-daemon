@@ -1,7 +1,7 @@
 /*
  * (C) 2016 Kimmo Lindholm <kimmo.lindholm@eke.fi>
  *
- * Pedometer daemon
+ * Step counter daemon
  *
  */
 
@@ -19,14 +19,14 @@ int main(int argc, char **argv)
     setlinebuf(stdout);
     setlinebuf(stderr);
 
-    printf("pedometerd: Starting daemon version %s\n", APPVERSION);
+    printf("Starting daemon version %s\n", APPVERSION);
 
     StepCounter stepcounter;
-    new PedometerdAdaptor(&stepcounter);
+    new StpcntrdAdaptor(&stepcounter);
 
     if (!stepcounter.registerDBus())
     {
-        printf("pedometerd: failed to reqister to dbus\n");
+        printf("Failed to reqister to dbus\n");
         return EXIT_FAILURE;
     }
 

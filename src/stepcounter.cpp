@@ -20,7 +20,8 @@ StepCounter::StepCounter(QObject *parent) :
 
     if (sensor == NULL || !sensor->isValid())
     {
-        printf("pedometerd: Unable to get session: %s\n",  qPrintable(sm.errorString()));
+        printf("Unable to get sensor session: %s\n",  qPrintable(sm.errorString()));
+        QCoreApplication::quit();
     }
     else
     {
@@ -38,7 +39,7 @@ StepCounter::~StepCounter()
         connection.unregisterObject(PATH);
         connection.unregisterService(SERVICE);
 
-        printf("pedometerd: unregistered from dbus sessionBus\n");
+        printf("Unregistered from dbus sessionBus\n");
     }
 
     if (sensor)
@@ -46,7 +47,7 @@ StepCounter::~StepCounter()
         setAutoUpdate(false);
         sensor->stop();
         delete sensor;
-        printf("pedometerd: sensor session removed\n");
+        printf("Sensor session removed\n");
     }
 }
 
@@ -69,14 +70,14 @@ bool StepCounter::registerDBus()
         }
         m_dbusRegistered = true;
 
-        printf("pedometerd: succesfully registered to dbus sessionBus \"%s\"\n", SERVICE);
+        printf("Succesfully registered to dbus sessionBus \"%s\"\n", SERVICE);
     }
     return true;
 }
 
 void StepCounter::quit()
 {
-    printf("pedometerd: quit requested from dbus\n");
+    printf("Quit requested from dbus\n");
     QCoreApplication::quit();
 }
 

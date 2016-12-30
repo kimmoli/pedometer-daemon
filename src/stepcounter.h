@@ -6,7 +6,7 @@
 #include <sensord-qt5/sensormanagerinterface.h>
 #include <QtDBus/QtDBus>
 
-#define SERVICE_NAME "com.kimmoli.pedometerd"
+#define SERVICE_NAME "com.kimmoli.stpcntrd"
 
 class QDBusInterface;
 class StepCounter : public QObject

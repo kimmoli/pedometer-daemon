@@ -1,9 +1,9 @@
 [Unit]
-Description=Pedometer step counter
+Description=Step counter
 After=user-session.target
 
 [Service]
-ExecStart=/usr/bin/pedometerd
+ExecStart=/usr/bin/stpcntrd
 
 [Install]
 WantedBy=post-user-session.target

@@ -1,20 +1,20 @@
 #
-# pedometer daemon spec
+# Step counter daemon
 # (C) kimmoli 2016
 #
-Name:       pedometerd
+Name:       stpcntrd
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
-Summary:    Pedometer step counter daemon
+Summary:    Step counter daemon
 Version:    0.0.1
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
-URL:        https://github.com/kimmoli/pedometer-daemon
+URL:        https://github.com/kimmoli/stpcntrd
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sensorfw-qt5 > 0.8.30
 Requires:   hybris-libsensorfw-qt5 > 0.8.30
@@ -45,20 +45,20 @@ rm -rf %{buildroot}
 %preun
 # in case of complete removal, stop and disable
 if [ "$1" = "0" ]; then
-  systemctl-user stop pedometerd
-  systemctl-user disable pedometerd
+  systemctl-user stop %{name}
+  systemctl-user disable %{name}
 fi
 
 %post
 systemctl-user daemon-reload
-systemctl-user start pedometerd
-systemctl-user enable pedometerd
+systemctl-user start %{name}
+systemctl-user enable %{name}
 
 %pre
 # In case of update, stop first
 if [ "$1" = "2" ]; then
-  systemctl-user stop pedometerd
-  systemctl-user disable pedometerd
+  systemctl-user stop %{name}
+  systemctl-user disable %{name}
 fi
 
 %files

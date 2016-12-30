@@ -1,4 +1,4 @@
-TARGET = pedometerd
+TARGET = stpcntrd
 
 QT += dbus network
 QT -= gui
@@ -7,7 +7,7 @@ CONFIG += link_pkgconfig
 PKGCONFIG += sensord-qt5
 
 # DBus
-system(qdbusxml2cpp config/com.kimmoli.pedometerd.xml -i src/stepcounter.h -a src/adaptor)
+system(qdbusxml2cpp config/com.kimmoli.$${TARGET}.xml -i src/stepcounter.h -a src/adaptor)
 
 target.path = /usr/bin/
 
@@ -25,7 +25,7 @@ INSTALLS += target dbusService dbusInterface systemduser
 DEFINES += "APPVERSION=\\\"$${SPECVERSION}\\\""
 
 SOURCES += \
-    src/pedometerd.cpp \
+    src/$${TARGET}.cpp \
     src/adaptor.cpp \
     src/stepcounter.cpp
 
