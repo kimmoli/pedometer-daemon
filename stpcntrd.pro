@@ -20,7 +20,10 @@ dbusInterface.path = /usr/share/dbus-1/interfaces/
 systemduser.files = config/$${TARGET}.service
 systemduser.path = /etc/systemd/user/
 
-INSTALLS += target dbusService dbusInterface systemduser
+sensorfwconf.files = config/90-stepcounter.conf
+sensorfwconf.path = /etc/sensorfw/sensord.conf.d/
+
+INSTALLS += target dbusService dbusInterface systemduser sensorfwconf
 
 DEFINES += "APPVERSION=\\\"$${SPECVERSION}\\\""
 
@@ -33,7 +36,8 @@ OTHER_FILES += \
     rpm/$${TARGET}.spec \
     config/com.kimmoli.$${TARGET}.service \
     config/com.kimmoli.$${TARGET}.xml \
-    config\$${TARGET}.service
+    config/$${TARGET}.service \
+    config/90-stepcounter.conf
 
 HEADERS += \
     src/adaptor.h \

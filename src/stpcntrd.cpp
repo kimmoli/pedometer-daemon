@@ -1,5 +1,5 @@
 /*
- * (C) 2016 Kimmo Lindholm <kimmo.lindholm@eke.fi>
+ * (C) 2017 Kimmo Lindholm <kimmo.lindholm@eke.fi>
  *
  * Step counter daemon
  *
