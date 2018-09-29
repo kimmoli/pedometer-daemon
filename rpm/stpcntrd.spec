@@ -1,6 +1,6 @@
 #
 # Step counter daemon
-# (C) kimmoli 2017
+# (C) kimmoli 2018
 #
 Name:       stpcntrd
 
@@ -66,4 +66,3 @@ fi
 %attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/dbus-1/
 %config %{_sysconfdir}/systemd/user/
-%config %{_sysconfdir}/sensorfw/sensord.conf.d/
