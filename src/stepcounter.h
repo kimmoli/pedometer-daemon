@@ -5,6 +5,7 @@
 #include <sensord-qt5/stepcountersensor_i.h>
 #include <sensord-qt5/sensormanagerinterface.h>
 #include <QtDBus/QtDBus>
+#include <QSettings>
 
 #define SERVICE_NAME "com.kimmoli.stpcntrd"
 
@@ -23,6 +24,7 @@ public slots:
     QString getVersion();
     int getSteps();
     Q_NOREPLY void setAutoUpdate(const bool& value);
+    Q_NOREPLY void resetStoredSteps();
     Q_NOREPLY void quit();
 
 signals:
@@ -33,9 +35,12 @@ private slots:
 
 private:
     void update();
+    void getStoredSteps();
+    void setStoredSteps();
 
     StepCounterSensorChannelInterface* sensor;
     int m_currentSteps;
+    int m_storedSteps;
     bool m_isConnected;
     bool m_dbusRegistered;
 };

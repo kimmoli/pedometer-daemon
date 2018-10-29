@@ -27,6 +27,7 @@ StepCounter::StepCounter(QObject *parent) :
     {
         sensor->start();
         sensor->setStandbyOverride(true);
+        getStoredSteps();
         update();
     }
 }
@@ -44,6 +45,7 @@ StepCounter::~StepCounter()
 
     if (sensor)
     {
+        setStoredSteps();
         setAutoUpdate(false);
         sensor->stop();
         delete sensor;
@@ -93,7 +95,7 @@ void StepCounter::dataChanged(const Unsigned &data)
 {
     m_currentSteps = data.x();
 
-    emit steps(m_currentSteps);
+    emit steps(m_storedSteps + m_currentSteps);
 }
 
 int StepCounter::getSteps()
@@ -101,7 +103,7 @@ int StepCounter::getSteps()
     if (!m_isConnected)
         update();
 
-    return m_currentSteps;
+    return m_storedSteps + m_currentSteps;
 }
 
 void StepCounter::setAutoUpdate(const bool &value)
@@ -123,6 +125,32 @@ void StepCounter::setAutoUpdate(const bool &value)
 
         m_isConnected = value;
     }
+}
+
+void StepCounter::getStoredSteps()
+{
+    QSettings settings("kimmoli.stpcntrd", "stpcntrd");
+
+    m_storedSteps = settings.value("steps", 0).toInt();
+
+    printf("Retrieved stored step count %d.\n", m_storedSteps);
+}
+
+void StepCounter::setStoredSteps()
+{
+    QSettings settings("kimmoli.stpcntrd", "stpcntrd");
+
+    settings.setValue("steps", QVariant(m_storedSteps + m_currentSteps));
+
+    printf("Stored step count %d.\n", m_storedSteps + m_currentSteps);
+}
+
+void StepCounter::resetStoredSteps()
+{
+    QSettings settings("kimmoli.stpcntrd", "stpcntrd");
+
+    settings.setValue("steps", QVariant(0));
+    m_storedSteps = 0;
 }
 
 QString StepCounter::getVersion()

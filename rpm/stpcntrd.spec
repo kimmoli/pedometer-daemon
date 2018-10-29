@@ -45,20 +45,22 @@ rm -rf %{buildroot}
 %preun
 # in case of complete removal, stop and disable
 if [ "$1" = "0" ]; then
-  systemctl-user stop %{name}
   systemctl-user disable %{name}
+  systemctl-user stop %{name}
 fi
 
 %post
 systemctl-user daemon-reload
 systemctl-user start %{name}
 systemctl-user enable %{name}
+DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/100000/dbus/user_bus_socket" \
+    dbus-send --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig
 
 %pre
 # In case of update, stop first
 if [ "$1" = "2" ]; then
-  systemctl-user stop %{name}
   systemctl-user disable %{name}
+  systemctl-user stop %{name}
 fi
 
 %files

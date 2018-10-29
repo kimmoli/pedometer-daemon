@@ -10,6 +10,7 @@
         <method name="setAutoUpdate">
             <arg name="value" type="b" direction="in" />
         </method>
+        <method name="resetStoredSteps" />
         <method name="quit" />
         <signal name="steps">
             <arg name="value" type="i" direction="out" />
